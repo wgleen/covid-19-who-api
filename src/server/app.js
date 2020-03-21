@@ -2,7 +2,9 @@ import express from 'express'
 import helmet from 'helmet'
 import bodyParser from 'body-parser'
 import loggerMiddleware, { logger } from './lib/logger'
-import routes from './api/routes'
+import i18nMiddleware from './lib/i18n'
+import apiRoutes from './api/routes'
+import { notFound as notFoundMiddleware } from './middlewares'
 import config from './config'
 
 export const bootstrap = (options = {}, callback) => {
@@ -12,13 +14,11 @@ export const bootstrap = (options = {}, callback) => {
   app.use(helmet())
   app.use(bodyParser.urlencoded({ extended: false }))
   app.use(bodyParser.json())
+  app.use(i18nMiddleware.init)
   app.use(express.static(`${config.paths.assets}`))
 
-  app.get('/', (_req, res) => {
-    res.send('Hello World')
-  })
-
-  app.use(routes)
+  app.use('/api', apiRoutes)
+  app.use(notFoundMiddleware)
 
   return app.listen(options.port, (err) => {
     if (err) return logger.error(err)

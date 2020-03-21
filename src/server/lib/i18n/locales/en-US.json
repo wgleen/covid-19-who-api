@@ -1,0 +1,8 @@
+{
+  "responses": {
+    "messages": {
+      "welcome": "Welcome to COVID-19 API based on World Health Organization reports",
+      "notFound": "Not Found"
+    }
+  }
+}
