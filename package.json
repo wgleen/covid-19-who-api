@@ -1,0 +1,49 @@
+{
+  "name": "covid-19-who-api",
+  "version": "1.0.0",
+  "description": "COVID-19 API from WHO data reports",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "if [ $NPM_CONFIG_PRODUCTION ]; then npm run build; fi",
+    "dev": "NODE_ENV=development ENV=development nodemon -r ./src/server/initializer.js src/server/server.js --exec babel-node",
+    "test": "NODE_ENV=test jest --config jest.config.json -u --passWithNoTests --detectOpenHandles",
+    "test:coverage": "npm test -- --coverage",
+    "test:watch": "npm test -- --watch",
+    "lint": "eslint src/**/*.{js,spec.js}",
+    "build": "npm run build:clear && npm run build:server",
+    "build:pre": "mkdir dist",
+    "build:clear": "rm -rf dist",
+    "build:server": "npm run build:pre && babel -d ./dist/server ./src/server -s",
+    "start": "node dist/server/cluster.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/node": "^7.8.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-transform-modules-commonjs": "^7.9.0",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "babel-plugin-rewire-exports": "^2.1.0",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^3.21.3",
+    "lodash": "^4.17.15",
+    "morgan": "^1.10.0",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-plugin-babel": "^5.3.0",
+    "eslint-plugin-import": "^2.20.1",
+    "faker": "^4.1.0",
+    "jest": "^25.1.0",
+    "jest-extended": "^0.11.5",
+    "nodemon": "^2.0.2"
+  }
+}

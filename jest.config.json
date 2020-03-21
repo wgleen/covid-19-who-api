@@ -1,0 +1,38 @@
+{
+  "name": "covid-19-who-api",
+  "verbose": true,
+  "setupFilesAfterEnv": [
+    "./test/setup.js"
+  ],
+  "testEnvironment": "node",
+  "setupFiles": [
+    "./test/helpers.js"
+  ],
+  "moduleFileExtensions": ["js", "json", "node"],
+  "globals": {
+    "NODE_ENV": "test"
+  },
+  "transform": {
+    "^.+\\.js$": "babel-jest"
+  },
+  "collectCoverageFrom": [
+    "src/server/**/*.js"
+  ],
+  "coverageReporters": [
+    "json-summary",
+    "text",
+    "html",
+    "lcov"
+  ],
+  "coveragePathIgnorePatterns": [
+    "/node_modules/",
+    "/dist/",
+    "/public/"
+  ],
+  "coverageDirectory": "coverage",
+  "testPathIgnorePatterns": [
+    "/node_modules/",
+    "/dist/",
+    "/public/"
+  ]
+}
