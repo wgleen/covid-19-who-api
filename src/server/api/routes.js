@@ -1,8 +1,8 @@
 import { Router } from 'express'
-import { notFound } from './middlewares'
+import { welcome } from './controllers'
 
 const routes = Router()
 
-routes.use(notFound)
+routes.get('/', welcome)
 
 export default routes
