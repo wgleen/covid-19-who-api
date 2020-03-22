@@ -4,6 +4,8 @@ import config from './config'
 import { logger } from './lib/logger'
 import { initializer } from './app'
 
+const bootstrap = initializer()
+
 const numCPUs = os.cpus().length
 
 if (cluster.isMaster) {
@@ -17,7 +19,7 @@ if (cluster.isMaster) {
       cluster.fork()
     })
 } else {
-  initializer({ port: config.port }, () => {
+  bootstrap({ port: config.port }, () => {
     logger.info(`Worker ${cluster.worker.id} running @ process ${cluster.worker.process.pid}!`)
   })
 }
