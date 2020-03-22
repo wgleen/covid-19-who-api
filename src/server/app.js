@@ -8,7 +8,7 @@ import apiRoutes from './api/routes'
 import { notFound as notFoundMiddleware } from './middlewares'
 import config from './config'
 
-export const initializer = (options = {}, callback) => {
+export const initializer = () => {
   const app = express()
 
   app.use(loggerMiddleware)
@@ -21,13 +21,15 @@ export const initializer = (options = {}, callback) => {
   app.use('/api', apiRoutes)
   app.use(notFoundMiddleware)
 
-  databaseInitializer(() => {
-    app.listen(options.port, (err) => {
-      if (err) return logger.error(err)
+  return (options = {}, callback) => {
+    databaseInitializer(() => {
+      app.listen(options.port, (err) => {
+        if (err) return logger.error(err)
 
-      if (callback) callback(app)
+        if (callback) callback(app)
 
-      return logger.info(`Listening on port ${options.port}`)
+        return logger.info(`Listening on port ${options.port}`)
+      })
     })
-  })
+  }
 }
