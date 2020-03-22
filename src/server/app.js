@@ -2,12 +2,13 @@ import express from 'express'
 import helmet from 'helmet'
 import bodyParser from 'body-parser'
 import loggerMiddleware, { logger } from './lib/logger'
+import { initializer as databaseInitializer } from './lib/database'
 import i18nMiddleware from './lib/i18n'
 import apiRoutes from './api/routes'
 import { notFound as notFoundMiddleware } from './middlewares'
 import config from './config'
 
-export const bootstrap = (options = {}, callback) => {
+export const initializer = (options = {}, callback) => {
   const app = express()
 
   app.use(loggerMiddleware)
@@ -20,11 +21,13 @@ export const bootstrap = (options = {}, callback) => {
   app.use('/api', apiRoutes)
   app.use(notFoundMiddleware)
 
-  return app.listen(options.port, (err) => {
-    if (err) return logger.error(err)
+  databaseInitializer(() => {
+    app.listen(options.port, (err) => {
+      if (err) return logger.error(err)
 
-    if (callback) callback(app)
+      if (callback) callback(app)
 
-    return logger.info(`Listening on port ${options.port}`)
+      return logger.info(`Listening on port ${options.port}`)
+    })
   })
 }
