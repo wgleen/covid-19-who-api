@@ -1,6 +1,6 @@
 import config from './config'
-import { bootstrap } from './app'
+import { initializer } from './app'
 
-const server = bootstrap({ port: config.port })
+const server = initializer({ port: config.port })
 
 export default server
