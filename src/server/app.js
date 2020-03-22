@@ -19,6 +19,7 @@ export const initializer = () => {
   app.use(express.static(`${config.paths.assets}`))
 
   app.use('/api', apiRoutes)
+
   app.use(notFoundMiddleware)
 
   return (options = {}, callback) => {
