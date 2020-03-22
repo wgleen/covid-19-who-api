@@ -1,8 +1,13 @@
 {
 	"responses": {
 		"messages": {
-			"welcome": "Bem-vindo a API COVID-19 baseada nos relatórios da Organização Mundial da Saúde",
-			"notFound": "Não encontrado"
+      "notFound": "Não encontrado",
+      "api": {
+        "welcome": "Bem-vindo a API COVID-19 baseada nos relatórios da Organização Mundial da Saúde",
+        "v1": {
+          "welcome": "Bem-vindo a API COVID-19 Versão 1"
+        }
+      }
 		}
 	}
 }
