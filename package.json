@@ -32,7 +32,7 @@
     "express": "^4.17.1",
     "helmet": "^3.21.3",
     "i18n": "^0.8.6",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "mongoose": "^5.9.5",
     "morgan": "^1.10.0",
     "swagger-jsdoc": "^3.5.0",
